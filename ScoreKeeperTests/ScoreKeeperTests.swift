@@ -23,5 +23,16 @@ struct ScoreKeeperTests {
             #expect(player.score == newValue)
         }
     }
+    
+    @Test("Highest score wins")
+    func highestScoreWins() async throws {
+        var scoreboard = Scoreboard(players: [
+            Player(name: "Israel", score: 100),
+            Player(name: "Evan", score: 30),
+        ], state: .gameOver, doesHighestScoreWin: true)
+        
+        let winners = scoreboard.winners
+        #expect(winners == [Player(name: "Israel", score: 100)])
+    }
 
 }

@@ -12,6 +12,11 @@ struct Scoreboard {
     var players: [Player] = []
     
     var state = GameState.setup
+    var doesHighestScoreWin: Bool = true
+    
+    var winners: [Player] {
+        players
+    }
     
     mutating func resetScores(to newValue: Int) {
         for index in 0..<players.count {
