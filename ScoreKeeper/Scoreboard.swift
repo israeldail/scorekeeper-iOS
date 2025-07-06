@@ -10,4 +10,11 @@ import Foundation
 struct Scoreboard {
     var scores: [Int] = []
     var players: [Player] = []
+    
+    var state = GameState.setup
+    
+    mutating func resetScores(to newValue: Int) {
+        scores = [newValue]
+        players = []
+    }
 }
