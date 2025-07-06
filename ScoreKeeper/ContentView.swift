@@ -11,11 +11,30 @@ struct ContentView: View {
     @State private var players: [Player] = []
     
     var body: some View {
-        VStack {
-            ForEach(0..<players.count, id: \.description) { player in
-                TextField("Name", text: $players[player].name)
-                Stepper("\(players[player].score)", value: $players[player].score)
+        VStack(alignment: .leading) {
+            Text("Score Keeper")
+                .font(.title)
+                .bold()
+                .padding(.bottom)
+            
+            Grid {
+                GridRow {
+                    Text("Player")
+                        .gridColumnAlignment(.leading)
+                    Text("Score")
+                }
+                .font(.headline)
+                
+                ForEach(0..<players.count, id: \.description) { player in
+                    GridRow {
+                        TextField("Name", text: $players[player].name)
+                        Text("\(players[player].score)")
+                        Stepper("\(players[player].score)", value: $players[player].score)
+                            .labelsHidden()
+                    }
+                }
             }
+            .padding(.vertical)
             
             Button("Add Player", systemImage: "plus") {
                 players.append(Player(name: "", score: 0))
